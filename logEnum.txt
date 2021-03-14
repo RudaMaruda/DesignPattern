@@ -1,0 +1,9 @@
+16:05:46.065461 , INFO , Info from ENum
+16:06:26.987976 , INFO , Info from ENum
+16:06:26.988895 , ERROR , Error from ENum
+16:08:03.243749 , INFO , Info from ENum
+16:08:03.244407 , ERROR , Error from ENum
+16:09:37.889721 , INFO , Info from ENum
+16:09:37.890453 , ERROR , Error from ENum
+16:09:54.026858 , INFO , Info from ENum
+16:09:54.027614 , ERROR , Error from ENum

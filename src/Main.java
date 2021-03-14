@@ -49,5 +49,18 @@ public class Main {
         GeometricShape geometricShape = factory.getShape(ShapeType.CIRCLE);
         geometricShape.draw();
 
+        AbstractFactory factory2 = FactoryProvider.getFactory(FactoryType.TWO_D_SHAPE_FACTORY);
+        GeometricShape geometricShape1 = factory2.getShape(ShapeType.TRIANGLE);
+        geometricShape1.draw();
+
+
+
+        AbstractFactory factory3 = FactoryProvider.getFactory(FactoryType.TWO_D_SHAPE_FACTORY);
+        GeometricShapeArea geometricShape2 = (GeometricShapeArea) factory3.getShape(ShapeType.TRAPEZOID);
+       geometricShape2.draw();
+        geometricShape2.getPerimeter();
+        geometricShape2.getArea();
+
+
     }
 }
