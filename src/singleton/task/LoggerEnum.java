@@ -8,8 +8,14 @@ import java.time.LocalTime;
 
 public enum LoggerEnum {
     INSTANCE_LOG;
+private File loggingFileEnum;
 
-    private static File loggingFileEnum = new File("logEnum.txt");
+
+    LoggerEnum() {
+        loggingFileEnum = new File("logEnum.txt");
+    }
+
+
 
     public void log(LEVEL level,String msg){
 
