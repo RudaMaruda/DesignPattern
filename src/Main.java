@@ -16,15 +16,22 @@ import decorator.task.Functionals;
 import decorator.task.Internet;
 import decorator.task.MultimediaBasic;
 import decorator.task.Telephone;
-import facade.User;
-import facade.UserFacade;
 import factory.*;
-import factory_method.Car;
-import factory_method.Vehicle;
-import factory_method.VehicleFactory;
-import factory_method.VehicleType;
+import observer.Animal;
+import observer.Observable;
+import observer.PersonO;
+import strategy.CompresionContext;
+import strategy.Zip;
+import strategy.task.AddingNumber;
+import strategy.task.CalculateContext;
+import strategy.task.DividingNumber;
+import university.Person;
+import university.PersonFacade;
 
-import java.sql.SQLOutput;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Main {
 
@@ -66,6 +73,7 @@ public class Main {
                 .setSpicy(true)
                 .buildP();
         System.out.println(pizza4);
+        System.out.println();
 
         AbstractFactory factory = FactoryProvider.getFactory(FactoryType.TWO_D_SHAPE_FACTORY);
         GeometricShape geometricShape = factory.getShape(ShapeType.CIRCLE);
@@ -83,6 +91,7 @@ public class Main {
         geometricShape2.draw();
         geometricShape2.getPerimeter();
         geometricShape2.getArea();
+        System.out.println();
 
 
 //        Vehicle vehicle = VehicleFactory.getVehicle(VehicleType.MOTOCYCLE);
@@ -102,6 +111,7 @@ public class Main {
 
         // wywolujemy metody z obiektu docelowego
         usb.connect(hdmiToUsb);
+        System.out.println();
 
         /*-------------*/
 
@@ -113,6 +123,7 @@ public class Main {
         Adapter adapter = new AllToPdfAdapter(converter);
 
         pdf.convert(adapter);
+        System.out.println();
 
         /*-------------*/
 
@@ -126,7 +137,9 @@ public class Main {
         VehicleD vehicleLeather = new LeatherCocpit(vehicle);
         VehicleD vehicleLeatherWithAbs = new AbsCar(vehicleLeather);
         System.out.println(vehicleLeatherWithAbs.description());
+        System.out.println();
 
+        /*-------------*/
 
         Functionals functionals = new MultimediaBasic();
         Functionals functionalsWithInternet = new Internet(functionals);
@@ -135,12 +148,50 @@ public class Main {
         System.out.println(functionals.description());
         System.out.println(functionalsWithInternet.description());
         System.out.println(functionalsWithInternetAndTelephone.description());
+        System.out.println();
+
+        /*-------------*/
+
+        CompresionContext context = new CompresionContext();
+        context.setCompressionStrategy(new Zip());
+
+        List<File> fileToCompress = new ArrayList<File>();
+        File exampleFile = new File("exampleFile");
+        fileToCompress.add(exampleFile);
+
+        context.createArchieve(fileToCompress);
+        System.out.println();
 
 
+        /*-------------*/
 
+        CalculateContext calculateContext = new CalculateContext();
+        String operator = "+";
+        int x=10;
+        int y = 15;
 
+        if ("+".equals(operator)) {
+            calculateContext.setCalculateStrategy(new AddingNumber());
 
+        } else if ("/".equals(operator)){
+            calculateContext.setCalculateStrategy(new DividingNumber());
+        }
 
+        System.out.println(calculateContext.calculate(x,y));
+        System.out.println();
 
+        /*-------------*/
+
+        Observable observable = new Observable();
+        observable.attach(new PersonO());
+        observable.attach(new Animal());
+        observable.notifyObserver();
+        /*-------------*/
+        PersonFacade personFacade = new PersonFacade();
+        List<Person> personList = new LinkedList<>();
+        personList.add(personFacade.addStudent("Alex","Zrezly","Java"));
+        personList.add(personFacade.addTeacher("Fred","Honsley",List.of("java","JavaScript")));
+
+        personFacade.displaySurNameSorted(personList);
     }
 }
